@@ -1,7 +1,7 @@
 // swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
-let sha256 = "8c5042a450587cfd54b8c83a48127e5ea5e58ee3d9f04d10276949e0880c6d72";
-let url = "https://github.com/Stremio/stremio-core-swift/releases/download/1.2.62/StremioCore.xcframework.zip";
+let sha256 = "1bfb2f8863fe0ee5e0f0500e0b221c867451672882f1f13c38b859fd71caa13b  StremioCore.xcframework.zip";
+let url = "https://github.com/Stremio/stremio-core-swift/releases/download/test-release-1/StremioCore.xcframework.zip";
 
 import PackageDescription
 
