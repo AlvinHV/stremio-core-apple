@@ -3,7 +3,7 @@ FRAMEWORK_NAME := StremioCore
 SWIFT_FILE := Package.swift
 .PHONY: all
 
-all: macos ios iossim visionossim tvos tvossim package
+all: macos ios iossim tvossim tvos visionossim package
 
 macos:
 	@cargo +nightly build -Z build-std --release --lib --target aarch64-apple-ios-macabi
