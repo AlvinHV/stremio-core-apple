@@ -1,9 +1,11 @@
 name: Release
 
 on:
-  push
-  # release:
-  #   types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version"
+        required: true
 
 jobs:
   Release:
@@ -43,25 +45,33 @@ jobs:
       #   run: cd .build && zip -r StremioCore.xcframework.zip ./StremioCore.xcframework
       # - name: Compute sha checksum of StremioCore.xcframework.zip
       #   run: cd .build && shasum -a 256 StremioCore.xcframework.zip > StremioCore.xcframework.zip.sha256
-      # - name: Upload build artifact to GitHub release assets
-      #   uses: svenstaro/upload-release-action@v2
-      #   with:
-      #     repo_token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag: ${{ github.ref }}
-      #     file: ./.build/StremioCore.xcframework.zip*
-      #     file_glob: true
-      #     overwrite: true
+
       - name: create test sha256
         run: mkdir .build && echo "test" > .build/StremioCore.xcframework.zip.sha256
-      - name: Log remote
-        run: git remote -v
+
       - name: Git config
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Checkout main
+        run: git checkout test
       - name: Update Package.swift manifest
         run: |
-          make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.ref_name }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256)"
+          make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.event.inputs.version }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256)"
+      - name: Commit Package.swift manifest
+        run: |
           git add .
-          git commit -m "Release version ${{ github.ref_name }}"
-          git push -f origin test
+          git commit -m "Release version ${{ github.event.inputs.version }}"
+          git push
+      - name: Create git release
+        run: |
+          git tag "${{ github.event.inputs.version }}"
+          git push --tags
+      - name: Upload build artifact to GitHub release assets
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.event.inputs.version }}
+          file: ./.build/StremioCore.xcframework.zip*
+          file_glob: true
+          overwrite: true
