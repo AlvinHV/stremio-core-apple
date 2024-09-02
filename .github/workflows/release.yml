@@ -15,55 +15,48 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      # - name: Set default rust toolchain
-      #   run: rustup default nightly
-      # - name: Install rustfmt
-      #   run: rustup component add rustfmt
-      # - name: Install clippy
-      #   run: rustup component add clippy
-      # - name: Add x86_64-apple-ios target
-      #   run: rustup target add x86_64-apple-ios
-      # - name: Add aarch64-apple-ios target
-      #   run: rustup target add aarch64-apple-ios
-      # - name: Add aarch64-apple-ios-sim target
-      #   run: rustup target add aarch64-apple-ios-sim
-      # - name: Install rust-src
-      #   run: rustup component add rust-src --toolchain nightly-aarch64-apple-darwin
-      # - name: Install cargo lipo
-      #   run: cargo install cargo-lipo
-      # - name: Install cbindgen
-      #   run: brew install cbindgen
-      # - name: Install protobuf
-      #   run: brew install protobuf
-      # - name: Install swift-protobuf
-      #   run: brew install swift-protobuf
-      # - name: Setup Xcode
-      #   run: sudo xcode-select -switch /Applications/Xcode_15.4.app
-      # - name: Build stremio-core-swift
-      #   run: make all
-      # - name: Archive StremioCore.xcframework
-      #   run: cd .build && zip -r StremioCore.xcframework.zip ./StremioCore.xcframework
-      # - name: Compute sha checksum of StremioCore.xcframework.zip
-      #   run: cd .build && shasum -a 256 StremioCore.xcframework.zip > StremioCore.xcframework.zip.sha256
-
-      - name: create test sha256
-        run: mkdir .build && echo "test" > .build/StremioCore.xcframework.zip.sha256
-
       - name: Git config
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - name: Checkout main
-        run: git checkout test
+      - name: Set default rust toolchain
+        run: rustup default nightly
+      - name: Install rustfmt
+        run: rustup component add rustfmt
+      - name: Install clippy
+        run: rustup component add clippy
+      - name: Add x86_64-apple-ios target
+        run: rustup target add x86_64-apple-ios
+      - name: Add aarch64-apple-ios target
+        run: rustup target add aarch64-apple-ios
+      - name: Add aarch64-apple-ios-sim target
+        run: rustup target add aarch64-apple-ios-sim
+      - name: Install rust-src
+        run: rustup component add rust-src --toolchain nightly-aarch64-apple-darwin
+      - name: Install cargo lipo
+        run: cargo install cargo-lipo
+      - name: Install cbindgen
+        run: brew install cbindgen
+      - name: Install protobuf
+        run: brew install protobuf
+      - name: Install swift-protobuf
+        run: brew install swift-protobuf
+      - name: Setup Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_15.4.app
+      - name: Build stremio-core-swift
+        run: make all
+      - name: Archive StremioCore.xcframework
+        run: cd .build && zip -r StremioCore.xcframework.zip ./StremioCore.xcframework
+      - name: Compute sha checksum of StremioCore.xcframework.zip
+        run: cd .build && shasum -a 256 StremioCore.xcframework.zip > StremioCore.xcframework.zip.sha256
       - name: Update Package.swift manifest
-        run: |
-          make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.event.inputs.version }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256)"
-      - name: Commit Package.swift manifest
+        run: make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.event.inputs.version }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256)"
+      - name: Push Package.swift manifest
         run: |
           git add .
           git commit -m "Release version ${{ github.event.inputs.version }}"
           git push
-      - name: Create git release
+      - name: Push git tag
         run: |
           git tag "${{ github.event.inputs.version }}"
           git push --tags
