@@ -53,6 +53,8 @@ jobs:
       #     overwrite: true
       - name: create test sha256
         run: mkdir .build && echo "test" > .build/StremioCore.xcframework.zip.sha256
+      - name: Log remote
+        run: git remote -v
       - name: Git config
         run: |
           git config user.name "github-actions[bot]"
