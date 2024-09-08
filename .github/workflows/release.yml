@@ -50,7 +50,7 @@ jobs:
       - name: Compute sha checksum of StremioCore.xcframework.zip
         run: cd .build && shasum -a 256 StremioCore.xcframework.zip > StremioCore.xcframework.zip.sha256
       - name: Update Package.swift manifest
-        run: make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.event.inputs.version }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256)"
+        run: make manifest url="https://github.com/Stremio/stremio-core-swift/releases/download/${{ github.event.inputs.version }}/StremioCore.xcframework.zip" sha256="$(cat .build/StremioCore.xcframework.zip.sha256 | awk '{print $1}')"
       - name: Push Package.swift manifest
         run: |
           git add .
