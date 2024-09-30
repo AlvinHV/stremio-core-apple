@@ -58,11 +58,11 @@ objc2-foundation = { version = "0.2.2", features = [
 # apple feature is deprecated, apple platform is by default enabled.
 objc2 = { version = "0.5"}
 
-[target.'cfg(apple)'.dependencies]
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
 block2 = { version = "0.5" }
 objc-sys = { version = "0.3", features = ["apple"] }
 
-[target.'cfg(unix)'.dependencies]
+[target.'cfg(target_os = "linux")'.dependencies]
 block2 = { version = "0.5", default-features = false, features = ["gnustep-2-0"] }
 objc-sys = { version = "0.3", features = ["gnustep-2-0"] }
 objc2 = { version = "0.5", features = ["gnustep-2-0"] }
