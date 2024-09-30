@@ -2,14 +2,16 @@
 
 `stremio-core-swift` is a wrapper for Apple operating systems, based on `stremio-core-kotlin`. Any changes that are not specific to Apple should be contributed to `stremio-core-kotlin`.
 
-## Adding as an SPM Package
+## Apple
+
+### Adding as an SPM Package
 
 To integrate `stremio-core-swift` into your project, simply add it as a Swift Package Manager (SPM) package. It will automatically handle everything for you:
 
 - Protobuf will be generated at Xcode compile time.
 - The compiled Rust binary will be fetched from the releases.
 
-## Alternatively, complie Rust Binary on Your Mac
+### Alternatively, compile Rust Binary on Your Mac
 
 To compile the Rust binary on your macOS machine, follow these steps:
 
@@ -39,3 +41,12 @@ To compile the Rust binary on your macOS machine, follow these steps:
 4. **Add the Local Package in Xcode:**
 
    Finally, add the package as a local package in Xcode.
+
+
+## Linux
+
+Prerequisite:
+- GNUStep 2.0
+  You can use `apt` on Debian based systems to install 2 packages 
+   `sudo apt install gnustep gnustep-devel`
+

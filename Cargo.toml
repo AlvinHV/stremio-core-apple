@@ -1,6 +1,6 @@
 [package]
 name = "stremio-core-swift"
-version = "1.2.62"
+version = "1.2.63"
 authors = ["Smart Code OOD"]
 edition = "2021"
 resolver = "2"
@@ -41,6 +41,8 @@ tokio = { version = "1", features = ["rt", "rt-multi-thread", "sync"] }
 prost = "0.12"
 prost-types = "0.12"
 
+itertools = "0.13.0"
+
 objc2-foundation = { version = "0.2.2", features = [
     "NSString",
     "NSData",
@@ -52,9 +54,18 @@ objc2-foundation = { version = "0.2.2", features = [
     "NSError",
     "block2",
 ] }
-objc2 = "0.5.2"
-block2 = "0.5.1"
-itertools = "0.13.0"
+
+# apple feature is deprecated, apple platform is by default enabled.
+objc2 = { version = "0.5"}
+
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
+block2 = { version = "0.5" }
+objc-sys = { version = "0.3", features = ["apple"] }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+block2 = { version = "0.5", default-features = false, features = ["gnustep-2-0"] }
+objc-sys = { version = "0.3", features = ["gnustep-2-0"] }
+objc2 = { version = "0.5", features = ["gnustep-2-0"] }
 
 [build-dependencies]
 prost-build = "0.12"
