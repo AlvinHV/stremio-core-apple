@@ -32,11 +32,12 @@ use stremio_core::types::resource::Stream;
 use stremio_core::types::search_history::SearchHistoryBucket;
 use stremio_core::types::streams::StreamsBucket;
 
-use crate::bridge::{FromProtobuf, ToProtobuf};
 use crate::env::{AppleEnv, AppleEvent};
 use crate::model::AppleModel;
-use crate::protobuf::stremio::core::runtime;
-use crate::protobuf::stremio::core::runtime::Field;
+use stremio_core_protobuf::{
+    bridge::{FromProtobuf, ToProtobuf},
+    protobuf::stremio::core::runtime::{self, Field},
+};
 
 static RUNTIME: Lazy<RwLock<Option<Loadable<Runtime<AppleEnv, AppleModel>, EnvError>>>> =
     Lazy::new(|| Default::default());

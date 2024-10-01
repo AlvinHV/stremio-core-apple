@@ -80,7 +80,7 @@ checksum = "5cc23269a4f8976d0a4d2e7109211a419fe30e8d88d677cd60b6bc79c5732e0a"
 dependencies = [
  "addr2line",
  "cc",
- "cfg-if 1.0.0",
+ "cfg-if",
  "libc",
  "miniz_oxide",
  "object",
@@ -176,12 +176,6 @@ dependencies = [
 
 [[package]]
 name = "cfg-if"
-version = "0.1.10"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
-
-[[package]]
-name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
@@ -228,7 +222,7 @@ version = "1.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a97769d94ddab943e4510d138150169a2758b5ef3eb191a9ee688de3e23ef7b3"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
 ]
 
 [[package]]
@@ -505,7 +499,7 @@ version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4567c8db10ae91089c99af84c68c38da3ec2f087c3f82960bcdbf3656b6f4d7"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
  "libc",
  "wasi",
 ]
@@ -647,15 +641,6 @@ name = "itertools"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
-dependencies = [
- "either",
-]
-
-[[package]]
-name = "itertools"
-version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
 dependencies = [
  "either",
 ]
@@ -1304,7 +1289,7 @@ version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3bf829a2d51ab4a5ddf1352d8470c140cadc8301b2ae1789db023f01cedd6ba"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
  "cpufeatures",
  "digest",
 ]
@@ -1315,7 +1300,7 @@ version = "0.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "793db75ad2bcafc3ffa7c68b215fee268f537982cd901d132f89c6343f3a3dc8"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
  "cpufeatures",
  "digest",
 ]
@@ -1342,6 +1327,50 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b97fcaeba89edba30f044a10c6a3cc39df9c3f17d7cd829dd1446cab35f890e0"
 dependencies = [
  "maybe-uninit",
+]
+
+[[package]]
+name = "stremio-core"
+version = "0.1.0"
+source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
+dependencies = [
+ "anyhow",
+ "base64 0.21.7",
+ "boolinator",
+ "chrono",
+ "derivative",
+ "derive_more",
+ "either",
+ "enclose",
+ "flate2",
+ "futures",
+ "hex",
+ "http",
+ "itertools 0.11.0",
+ "lazysort",
+ "localsearch",
+ "magnet-url",
+ "num",
+ "once_cell",
+ "percent-encoding",
+ "regex",
+ "semver",
+ "serde",
+ "serde_bencode",
+ "serde_json",
+ "serde_path_to_error",
+ "serde_url_params",
+ "serde_with",
+ "sha1",
+ "sha2",
+ "stremio-derive 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
+ "stremio-official-addons",
+ "stremio-serde-hex",
+ "stremio-watched-bitfield 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
+ "strum",
+ "thiserror",
+ "tracing",
+ "url",
 ]
 
 [[package]]
@@ -1378,10 +1407,10 @@ dependencies = [
  "serde_with",
  "sha1",
  "sha2",
- "stremio-derive",
+ "stremio-derive 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
  "stremio-official-addons",
  "stremio-serde-hex",
- "stremio-watched-bitfield",
+ "stremio-watched-bitfield 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
  "strum",
  "thiserror",
  "tracing",
@@ -1403,7 +1432,7 @@ dependencies = [
  "prost-types",
  "protox",
  "semver",
- "stremio-core",
+ "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
  "stremio-core-web",
  "url",
 ]
@@ -1414,8 +1443,6 @@ version = "1.2.63"
 dependencies = [
  "Inflector",
  "block2",
- "boolinator",
- "cfg-if 0.1.10",
  "chrono",
  "enclose",
  "futures",
@@ -1423,7 +1450,6 @@ dependencies = [
  "glob",
  "hex",
  "http",
- "itertools 0.13.0",
  "objc-sys",
  "objc2",
  "objc2-foundation",
@@ -1432,15 +1458,12 @@ dependencies = [
  "prost-build",
  "prost-types",
  "protox",
- "semver",
  "serde",
  "serde_json",
  "serde_path_to_error",
- "stremio-core",
+ "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
  "stremio-core-protobuf",
- "stremio-watched-bitfield",
  "tokio",
- "url",
 ]
 
 [[package]]
@@ -1458,9 +1481,22 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "stremio-core",
+ "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
  "tracing",
  "url",
+]
+
+[[package]]
+name = "stremio-derive"
+version = "0.1.0"
+source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
+dependencies = [
+ "case",
+ "proc-macro-crate",
+ "proc-macro2",
+ "proc_macro_roids",
+ "quote",
+ "syn 2.0.75",
 ]
 
 [[package]]
@@ -1495,6 +1531,16 @@ dependencies = [
  "array-init",
  "serde",
  "smallvec",
+]
+
+[[package]]
+name = "stremio-watched-bitfield"
+version = "0.1.0"
+source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
+dependencies = [
+ "base64 0.13.1",
+ "flate2",
+ "serde",
 ]
 
 [[package]]
@@ -1563,7 +1609,7 @@ version = "3.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04cbcdd0c794ebb0d4cf35e88edd2f7d2c4c3e9a5a6dab322839b321c6a87a64"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
  "fastrand",
  "once_cell",
  "rustix",
@@ -1763,7 +1809,7 @@ version = "0.2.93"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a82edfc16a6c469f5f44dc7b571814045d60404b55a0ee849f9bcfa2e63dd9b5"
 dependencies = [
- "cfg-if 1.0.0",
+ "cfg-if",
  "once_cell",
  "wasm-bindgen-macro",
 ]
