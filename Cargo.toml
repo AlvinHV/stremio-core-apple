@@ -14,13 +14,14 @@ lto = true
 opt-level = 3
 
 [dependencies]
-stremio-core = { git = "https://github.com/Stremio/stremio-core", rev = "f74c212752443ef625a17d48ce4dc955f2300bc7", features = [
+stremio-core = { git = "https://github.com/Stremio/stremio-core", branch = "feat/serialize-model-separatelly-from-creating-it", features = [
     "derive",
     "analytics",
     "env-future-send",
 ] }
+stremio-core-protobuf = { git = "https://github.com/Stremio/stremio-core-kotlin", branch = "feat/improve-imports-and-exports" }
 
-stremio-watched-bitfield = { git = "https://github.com/Stremio/stremio-core", rev = "f74c212752443ef625a17d48ce4dc955f2300bc7" }
+stremio-watched-bitfield = { git = "https://github.com/Stremio/stremio-core", branch = "feat/serialize-model-separatelly-from-creating-it" }
 serde = "1.0.*"
 serde_json = "1.0.*"
 futures = "0.3.*"

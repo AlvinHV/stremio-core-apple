@@ -322,9 +322,9 @@ dependencies = [
 
 [[package]]
 name = "either"
-version = "1.13.0"
+version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60b1af1c220855b6ceac025d3f6ecdd2b7c4894bfe9cd9bda4fbb4bc7c0d4cf0"
+checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
 
 [[package]]
 name = "enclose"
@@ -594,9 +594,9 @@ checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
 name = "idna"
-version = "0.5.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "634d9b1461af396cad843f47fdba5597a4f9e6ddd4bfb6ff5d85028c25cb12f6"
+checksum = "7d20d6b07bfbc108882d88ed8e37d39636dcc260e15e30c45e6ba089610b917c"
 dependencies = [
  "unicode-bidi",
  "unicode-normalization",
@@ -622,6 +622,15 @@ dependencies = [
  "equivalent",
  "hashbrown 0.14.5",
  "serde",
+]
+
+[[package]]
+name = "itertools"
+version = "0.10.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
+dependencies = [
+ "either",
 ]
 
 [[package]]
@@ -1338,7 +1347,7 @@ dependencies = [
 [[package]]
 name = "stremio-core"
 version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?rev=f74c212752443ef625a17d48ce4dc955f2300bc7#f74c212752443ef625a17d48ce4dc955f2300bc7"
+source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
 dependencies = [
  "anyhow",
  "base64 0.21.7",
@@ -1353,7 +1362,6 @@ dependencies = [
  "hex",
  "http",
  "itertools 0.11.0",
- "lazy_static",
  "lazysort",
  "localsearch",
  "magnet-url",
@@ -1377,6 +1385,26 @@ dependencies = [
  "strum",
  "thiserror",
  "tracing",
+ "url",
+]
+
+[[package]]
+name = "stremio-core-protobuf"
+version = "0.1.0"
+source = "git+https://github.com/Stremio/stremio-core-kotlin?branch=feat/improve-imports-and-exports#31bfd9bf797d9f28841d7995a489f5262f092bd3"
+dependencies = [
+ "Inflector",
+ "boolinator",
+ "chrono",
+ "glob",
+ "hex",
+ "prost",
+ "prost-build",
+ "prost-types",
+ "protox",
+ "semver",
+ "stremio-core",
+ "stremio-core-web",
  "url",
 ]
 
@@ -1409,15 +1437,36 @@ dependencies = [
  "serde_json",
  "serde_path_to_error",
  "stremio-core",
+ "stremio-core-protobuf",
  "stremio-watched-bitfield",
  "tokio",
  "url",
 ]
 
 [[package]]
+name = "stremio-core-web"
+version = "0.47.8"
+source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
+dependencies = [
+ "boolinator",
+ "chrono",
+ "either",
+ "enclose",
+ "futures",
+ "itertools 0.10.5",
+ "once_cell",
+ "semver",
+ "serde",
+ "serde_json",
+ "stremio-core",
+ "tracing",
+ "url",
+]
+
+[[package]]
 name = "stremio-derive"
 version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?rev=f74c212752443ef625a17d48ce4dc955f2300bc7#f74c212752443ef625a17d48ce4dc955f2300bc7"
+source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
 dependencies = [
  "case",
  "proc-macro-crate",
@@ -1451,7 +1500,7 @@ dependencies = [
 [[package]]
 name = "stremio-watched-bitfield"
 version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?rev=f74c212752443ef625a17d48ce4dc955f2300bc7#f74c212752443ef625a17d48ce4dc955f2300bc7"
+source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
 dependencies = [
  "base64 0.13.1",
  "flate2",
@@ -1680,9 +1729,9 @@ checksum = "0336d538f7abc86d282a4189614dfaa90810dfc2c6f6427eaf88e16311dd225d"
 
 [[package]]
 name = "url"
-version = "2.5.2"
+version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22784dbdf76fdde8af1aeda5622b546b422b6fc585325248a2bf9f5e41e94d6c"
+checksum = "143b538f18257fac9cad154828a57c6bf5157e1aa604d4816b5995bf6de87ae5"
 dependencies = [
  "form_urlencoded",
  "idna",

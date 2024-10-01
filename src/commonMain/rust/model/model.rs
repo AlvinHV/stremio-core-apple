@@ -1,4 +1,5 @@
 use prost::Message;
+
 use stremio_core::models::addon_details::AddonDetails;
 use stremio_core::models::catalog_with_filters::CatalogWithFilters;
 use stremio_core::models::catalogs_with_extra::CatalogsWithExtra;
@@ -21,9 +22,10 @@ use stremio_core::types::search_history::SearchHistoryBucket;
 use stremio_core::types::streams::StreamsBucket;
 use stremio_core::Model;
 
-use crate::bridge::ToProtobuf;
+use stremio_core_protobuf::bridge::ToProtobuf;
+
 use crate::env::AppleEnv;
-use crate::model::AddonsWithFilters;
+use stremio_core_protobuf::model::AddonsWithFilters;
 
 #[derive(Model, Clone)]
 #[model(AppleEnv)]
@@ -99,30 +101,30 @@ impl AppleModel {
 
     pub fn get_state_binary(&self, field: &AppleModelField) -> Vec<u8> {
         match field {
-            AppleModelField::Ctx => self.ctx.to_protobuf(&()).encode_to_vec(),
-            AppleModelField::AuthLink => self.auth_link.to_protobuf(&()).encode_to_vec(),
+            AppleModelField::Ctx => self.ctx.to_protobuf::<AppleEnv>(&()).encode_to_vec(),
+            AppleModelField::AuthLink => self.auth_link.to_protobuf::<AppleEnv>(&()).encode_to_vec(),
             AppleModelField::ContinueWatchingPreview => self
                 .continue_watching_preview
-                .to_protobuf(&self.ctx)
+                .to_protobuf::<AppleEnv>(&self.ctx)
                 .encode_to_vec(),
-            AppleModelField::Library => self.library.to_protobuf(&self.ctx).encode_to_vec(),
+            AppleModelField::Library => self.library.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
             AppleModelField::LibraryByType => {
-                self.library_by_type.to_protobuf(&self.ctx).encode_to_vec()
+                self.library_by_type.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec()
             }
-            AppleModelField::Board => self.board.to_protobuf(&self.ctx).encode_to_vec(),
-            AppleModelField::Search => self.search.to_protobuf(&self.ctx).encode_to_vec(),
-            AppleModelField::Discover => self.discover.to_protobuf(&self.ctx).encode_to_vec(),
+            AppleModelField::Board => self.board.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
+            AppleModelField::Search => self.search.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
+            AppleModelField::Discover => self.discover.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
             AppleModelField::MetaDetails => {
-                self.meta_details.to_protobuf(&self.ctx).encode_to_vec()
+                self.meta_details.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec()
             }
-            AppleModelField::Addons => self.addons.to_protobuf(&self.ctx).encode_to_vec(),
+            AppleModelField::Addons => self.addons.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
             AppleModelField::AddonDetails => {
-                self.addon_details.to_protobuf(&self.ctx).encode_to_vec()
+                self.addon_details.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec()
             }
             AppleModelField::StreamingServer => {
-                self.streaming_server.to_protobuf(&()).encode_to_vec()
+                self.streaming_server.to_protobuf::<AppleEnv>(&()).encode_to_vec()
             }
-            AppleModelField::Player => self.player.to_protobuf(&self.ctx).encode_to_vec(),
+            AppleModelField::Player => self.player.to_protobuf::<AppleEnv>(&self.ctx).encode_to_vec(),
         }
     }
 }
