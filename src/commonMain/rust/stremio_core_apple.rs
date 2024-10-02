@@ -32,11 +32,12 @@ use stremio_core::types::resource::Stream;
 use stremio_core::types::search_history::SearchHistoryBucket;
 use stremio_core::types::streams::StreamsBucket;
 
-use crate::bridge::{FromProtobuf, ToProtobuf};
 use crate::env::{AppleEnv, AppleEvent};
 use crate::model::AppleModel;
-use crate::protobuf::stremio::core::runtime;
-use crate::protobuf::stremio::core::runtime::Field;
+use stremio_core_protobuf::{
+    bridge::{FromProtobuf, ToProtobuf},
+    protobuf::stremio::core::runtime::{self, Field},
+};
 
 static RUNTIME: Lazy<RwLock<Option<Loadable<Runtime<AppleEnv, AppleModel>, EnvError>>>> =
     Lazy::new(|| Default::default());
@@ -128,7 +129,7 @@ pub unsafe extern "C" fn initializeNative(device_info: *mut NSString) -> *mut NS
                             }));
                         };
                         let eventbytes =
-                            &NSData::with_bytes(&event.to_protobuf(&()).encode_to_vec());
+                            &NSData::with_bytes(&event.to_protobuf::<AppleEnv>(&()).encode_to_vec());
                         let _: () = unsafe {
                             msg_send![stremio_core_class, onRuntimeEvent: eventbytes.as_ref()]
                         };
@@ -141,14 +142,14 @@ pub unsafe extern "C" fn initializeNative(device_info: *mut NSString) -> *mut NS
                 Err(error) => {
                     *RUNTIME.write().expect("RUNTIME write failed") =
                         Some(Loadable::Err(error.to_owned()));
-                    let result_bytes = error.to_protobuf(&()).encode_to_vec();
+                    let result_bytes = error.to_protobuf::<AppleEnv>(&()).encode_to_vec();
                     Retained::into_raw(NSData::with_bytes(result_bytes.as_ref())) as *mut NSObject
                 }
             }
         }
         Err(error) => {
             *RUNTIME.write().expect("RUNTIME write failed") = Some(Loadable::Err(error.to_owned()));
-            let result_bytes = error.to_protobuf(&()).encode_to_vec();
+            let result_bytes = error.to_protobuf::<AppleEnv>(&()).encode_to_vec();
             Retained::into_raw(NSData::with_bytes(result_bytes.as_ref())) as *mut NSObject
         }
     }
@@ -197,7 +198,7 @@ pub unsafe extern "C" fn decodeStreamDataNative(field: *mut NSString) -> *mut NS
     let field = &*field;
     let stream = match Stream::decode(field.to_string()) {
         Ok(stream) => stream
-            .to_protobuf(&(None, None, None, None))
+            .to_protobuf::<AppleEnv>(&(None, None, None, None))
             .encode_to_vec(),
         Err(_) => return Nil as *mut NSObject,
     };
