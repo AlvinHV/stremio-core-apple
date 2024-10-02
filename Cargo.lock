@@ -1363,54 +1363,10 @@ dependencies = [
  "serde_with",
  "sha1",
  "sha2",
- "stremio-derive 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
+ "stremio-derive",
  "stremio-official-addons",
  "stremio-serde-hex",
- "stremio-watched-bitfield 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
- "strum",
- "thiserror",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "stremio-core"
-version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
-dependencies = [
- "anyhow",
- "base64 0.21.7",
- "boolinator",
- "chrono",
- "derivative",
- "derive_more",
- "either",
- "enclose",
- "flate2",
- "futures",
- "hex",
- "http",
- "itertools 0.11.0",
- "lazysort",
- "localsearch",
- "magnet-url",
- "num",
- "once_cell",
- "percent-encoding",
- "regex",
- "semver",
- "serde",
- "serde_bencode",
- "serde_json",
- "serde_path_to_error",
- "serde_url_params",
- "serde_with",
- "sha1",
- "sha2",
- "stremio-derive 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
- "stremio-official-addons",
- "stremio-serde-hex",
- "stremio-watched-bitfield 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
+ "stremio-watched-bitfield",
  "strum",
  "thiserror",
  "tracing",
@@ -1420,7 +1376,7 @@ dependencies = [
 [[package]]
 name = "stremio-core-protobuf"
 version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core-kotlin?branch=feat/improve-imports-and-exports#31bfd9bf797d9f28841d7995a489f5262f092bd3"
+source = "git+https://github.com/Stremio/stremio-core-kotlin?branch=feat/improve-imports-and-exports#b6a333f1dd78dd80999f8d6ea910485f9b741dd4"
 dependencies = [
  "Inflector",
  "boolinator",
@@ -1432,7 +1388,7 @@ dependencies = [
  "prost-types",
  "protox",
  "semver",
- "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
+ "stremio-core",
  "stremio-core-web",
  "url",
 ]
@@ -1450,7 +1406,6 @@ dependencies = [
  "glob",
  "hex",
  "http",
- "objc-sys",
  "objc2",
  "objc2-foundation",
  "once_cell",
@@ -1461,7 +1416,7 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_path_to_error",
- "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=development)",
+ "stremio-core",
  "stremio-core-protobuf",
  "tokio",
 ]
@@ -1469,7 +1424,7 @@ dependencies = [
 [[package]]
 name = "stremio-core-web"
 version = "0.47.8"
-source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
+source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
 dependencies = [
  "boolinator",
  "chrono",
@@ -1481,7 +1436,7 @@ dependencies = [
  "semver",
  "serde",
  "serde_json",
- "stremio-core 0.1.0 (git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it)",
+ "stremio-core",
  "tracing",
  "url",
 ]
@@ -1490,19 +1445,6 @@ dependencies = [
 name = "stremio-derive"
 version = "0.1.0"
 source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
-dependencies = [
- "case",
- "proc-macro-crate",
- "proc-macro2",
- "proc_macro_roids",
- "quote",
- "syn 2.0.75",
-]
-
-[[package]]
-name = "stremio-derive"
-version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
 dependencies = [
  "case",
  "proc-macro-crate",
@@ -1537,16 +1479,6 @@ dependencies = [
 name = "stremio-watched-bitfield"
 version = "0.1.0"
 source = "git+https://github.com/Stremio/stremio-core?branch=development#416b2f9ca09e25799b4dab36717f8b2186e7cab8"
-dependencies = [
- "base64 0.13.1",
- "flate2",
- "serde",
-]
-
-[[package]]
-name = "stremio-watched-bitfield"
-version = "0.1.0"
-source = "git+https://github.com/Stremio/stremio-core?branch=feat/serialize-model-separatelly-from-creating-it#87e12f2d7bf0329f2bf8170f170617e58a2f7a1f"
 dependencies = [
  "base64 0.13.1",
  "flate2",

@@ -54,11 +54,11 @@ objc2 = { version = "0.5"}
 
 [target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies]
 block2 = { version = "0.5" }
-objc-sys = { version = "0.3", features = ["apple"] }
+# objc-sys = { version = "0.3", features = ["apple"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 block2 = { version = "0.5", default-features = false, features = ["gnustep-2-0"] }
-objc-sys = { version = "0.3", features = ["gnustep-2-0"] }
+# objc-sys = { version = "0.3", features = ["gnustep-2-0"] }
 objc2 = { version = "0.5", features = ["gnustep-2-0"] }
 
 [build-dependencies]
