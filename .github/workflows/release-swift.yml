@@ -64,7 +64,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.inputs.version }}
+          tag: ${{ github.event.inputs.version }} 
           file: ./.build/StremioCore.xcframework.zip*
           file_glob: true
           overwrite: true
